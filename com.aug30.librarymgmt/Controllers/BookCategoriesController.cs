@@ -62,6 +62,7 @@ namespace com.aug30.librarymgmt.Controllers
             {
                 _context.Add(eBookCategory);
                 await _context.SaveChangesAsync();
+                TempData["message"] = "Book Category Added Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(eBookCategory);
@@ -113,6 +114,7 @@ namespace com.aug30.librarymgmt.Controllers
                         throw;
                     }
                 }
+                TempData["message"] = "Book Category Updated Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(eBookCategory);
@@ -148,6 +150,7 @@ namespace com.aug30.librarymgmt.Controllers
             var eBookCategory = await _context.BookCategories.FindAsync(id);
             if (eBookCategory != null)
             {
+                TempData["message"] = "Book Category Deleted Successfully";
                 _context.BookCategories.Remove(eBookCategory);
             }
             
