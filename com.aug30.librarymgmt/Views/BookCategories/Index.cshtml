@@ -16,12 +16,7 @@
 </nav>
 <div class="card shadow">
     <div class="card-body">
-        @if (!string.IsNullOrEmpty(message))
-        {
-            <div class="alert alert-success">
-                @message
-            </div>
-        }
+
         <table class="table table-sm table-striped table-bordered">
             <thead class=" table-info">
                 <tr>
@@ -70,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <form asp-action="Delete">
+                <form id="deleteForm" asp-action="Delete">
                     <input id="deleteId" type="hidden" name="Id" />
                     <input type="submit" value="Delete" class="btn btn-danger" /> |
                 </form>
@@ -80,11 +75,24 @@
 </div>
 
 @section Scripts{
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <script>
+            showMessage('@message');
+        </script>
+
+    }
     <script type="text/javascript">
         $(document).ready(function () {
             $(".deleteFunction").click(function () {
-                $('#deleteId').val($(this).data()['val']);
-                $("#exampleModal").modal('show')
+                //$('#deleteId').val($(this).data()['val']);
+                //$("#exampleModal").modal('show')
+
+                showConfirm("Do you want to Delete?", "Confirm",
+                    function () {
+                        $('#deleteId').val($(this).data()['val']);
+                        $("#deleteForm").submit(); },
+                    function () {  });
             });
         });
     </script>

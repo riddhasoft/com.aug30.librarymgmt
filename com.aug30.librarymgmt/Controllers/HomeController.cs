@@ -1,5 +1,6 @@
 ﻿using com.aug30.librarymgmt.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace com.aug30.librarymgmt.Controllers
@@ -15,6 +16,7 @@ namespace com.aug30.librarymgmt.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation(new Exception("Home Page is Called"),"Error In Home Page");
             return View();
         }
 
